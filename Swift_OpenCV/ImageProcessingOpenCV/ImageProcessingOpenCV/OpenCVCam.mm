@@ -5,6 +5,11 @@
 #import <iostream>
 #import <math.h>
 
+#define ADVICE_LEFT 2
+#define ADVICE_RIGHT 3
+#define ADVICE_UP 4
+#define ADVICE_DOWN 5
+
 //#define PI 3.1415926535
 #define _USE_MATH_DEFINES
 
@@ -14,9 +19,6 @@ using namespace std;
 @implementation OpenCVCam
 
 cv::Point intersection = cv::Point(0, 0);
-
-cv::Point quadrants[4] = {cv::Point(0, 0), cv::Point(0, 0), cv::Point(0, 0), cv::Point(0, 0)};
-
 
 Color targetcolor_l("targetcolor_l",
            Scalar(0, 100, 100),
@@ -180,7 +182,8 @@ bool compareContourAreas (vector<cv::Point> contour1, vector<cv::Point> contour2
     return ( i > j );
 }
 
-float getDeviationAngle (cv::Point target, cv::Point frame) {
+int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
+    
     float so = abs( target.y - frame.y );
     float fo = abs( target.x - frame.x );
     float sf = sqrt( pow(so,2) + pow(fo,2) );
@@ -188,15 +191,62 @@ float getDeviationAngle (cv::Point target, cv::Point frame) {
     float gamma = asinf(so / sf);
     float psi = (M_PI/2) - gamma;
     
-    return psi;
+    float zeta;
+    string str_zeta;
+    cv::Point zeta_display = cv::Point(50,50);
+    // [0, 90]
+    if ((target.x > frame.x) && (target.y < frame.y)){
+        zeta = (M_PI/2) - psi;
+        str_zeta = "1zeta = " + to_string(zeta*57.2958);
+        putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        if (sin(zeta) <= cos(zeta)){
+            return ADVICE_LEFT;
+        } else {
+            return ADVICE_DOWN;
+        }
+    }
+    // [90, 180]
+    if ((target.x < frame.x) && (target.y < frame.y)){
+        zeta = (M_PI/2) + psi;
+        str_zeta = "2zeta = " + to_string(zeta*57.2958);
+        putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        if (sin(zeta) <= cos(zeta)){
+            return ADVICE_RIGHT;
+        } else {
+            return ADVICE_DOWN;
+        }
+    }
+    // [180, 270]
+    if ((target.x < frame.x) && (target.y > frame.y)){
+        zeta = M_PI+(M_PI/2) - psi;
+        str_zeta = "3zeta = " + to_string(zeta*57.2958);
+        putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        if (sin(zeta) <= cos(zeta)){
+            return ADVICE_RIGHT;
+        } else {
+            return ADVICE_UP;
+        }
+    }
+    // [280, 360]
+    if ((target.x > frame.x) && (target.y > frame.y)){
+        zeta = M_PI+(M_PI/2) + psi;
+        str_zeta = "4zeta = " + to_string(zeta*57.2958);
+        putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        if (sin(zeta) <= cos(zeta)){
+            return ADVICE_LEFT;
+        } else {
+            return ADVICE_UP;
+        }
+    }
+    return 0;
 }
+
 
 
 - (void) processImage : (cv::Mat &) image
 {
     
     // mask to only have white colors
-    cout << "blaaaah" << endl;
     Mat hsv;
     Mat targetmask, targetmasklow, targetmaskhigh;
     
@@ -223,8 +273,6 @@ float getDeviationAngle (cv::Point target, cv::Point frame) {
     image = findRects(image, rects);
     image = drawRects(image, rects);
     
-    float psi;
-    
     if (rects.size() > 0){
         std::sort(rects.begin(), rects.end(), compareContourAreas);
         auto cnt = rects.at(0);
@@ -241,7 +289,16 @@ float getDeviationAngle (cv::Point target, cv::Point frame) {
         string str_targetRect_center = to_string(targetRect.center.x) + ", " + to_string(targetRect.center.y);
         putText(image, str_targetRect_center, targetRect.center, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
         
-        psi = getDeviationAngle(targetRect.center, image_center);
+        int advice = getAdvice(targetRect.center, image_center, image);
+        string str_advice;
+        switch (advice) {
+            case ADVICE_LEFT  : str_advice = "LEFT";
+            case ADVICE_RIGHT : str_advice = "RIGHT";
+            case ADVICE_UP    : str_advice = "UP";
+            case ADVICE_DOWN  : str_advice = "DOWN";
+        }
+        cv::Point advice_display = cv::Point(image.cols/2, 50);
+        putText(image, str_advice, advice_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,0,0), 2);
     } else {
         cout << "no rects detected" << endl;
     }
