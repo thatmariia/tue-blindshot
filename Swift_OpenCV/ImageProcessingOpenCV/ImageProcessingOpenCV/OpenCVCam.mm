@@ -5,10 +5,10 @@
 #import <iostream>
 #import <math.h>
 
-#define ADVICE_LEFT 2
+#define ADVICE_LEFT  2
 #define ADVICE_RIGHT 3
-#define ADVICE_UP 4
-#define ADVICE_DOWN 5
+#define ADVICE_UP    4
+#define ADVICE_DOWN  5
 
 //#define PI 3.1415926535
 #define _USE_MATH_DEFINES
@@ -199,10 +199,10 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         zeta = (M_PI/2) - psi;
         str_zeta = "1zeta = " + to_string(zeta*57.2958);
         putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
-        if (sin(zeta) <= cos(zeta)){
-            return ADVICE_LEFT;
+        if (abs( sin(zeta) ) <= abs( cos(zeta) )){
+            return ADVICE_RIGHT;
         } else {
-            return ADVICE_DOWN;
+            return ADVICE_UP;
         }
     }
     // [90, 180]
@@ -210,10 +210,10 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         zeta = (M_PI/2) + psi;
         str_zeta = "2zeta = " + to_string(zeta*57.2958);
         putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
-        if (sin(zeta) <= cos(zeta)){
-            return ADVICE_RIGHT;
+        if (abs( sin(zeta) ) <= abs (cos(zeta) )){
+            return ADVICE_LEFT;
         } else {
-            return ADVICE_DOWN;
+            return ADVICE_UP;
         }
     }
     // [180, 270]
@@ -221,10 +221,10 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         zeta = M_PI+(M_PI/2) - psi;
         str_zeta = "3zeta = " + to_string(zeta*57.2958);
         putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
-        if (sin(zeta) <= cos(zeta)){
-            return ADVICE_RIGHT;
+        if (abs( sin(zeta) ) <= abs( cos(zeta) )){
+            return ADVICE_LEFT;
         } else {
-            return ADVICE_UP;
+            return ADVICE_DOWN;
         }
     }
     // [280, 360]
@@ -232,10 +232,10 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         zeta = M_PI+(M_PI/2) + psi;
         str_zeta = "4zeta = " + to_string(zeta*57.2958);
         putText(image, str_zeta, zeta_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
-        if (sin(zeta) <= cos(zeta)){
-            return ADVICE_LEFT;
+        if (abs( sin(zeta) ) <= abs( cos(zeta) )){
+            return ADVICE_RIGHT;
         } else {
-            return ADVICE_UP;
+            return ADVICE_DOWN;
         }
     }
     return 0;
@@ -293,12 +293,16 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         string str_advice;
         switch (advice) {
             case ADVICE_LEFT  : str_advice = "LEFT";
+                                break;
             case ADVICE_RIGHT : str_advice = "RIGHT";
+                                break;
             case ADVICE_UP    : str_advice = "UP";
+                                break;
             case ADVICE_DOWN  : str_advice = "DOWN";
+                                break;
         }
         cv::Point advice_display = cv::Point(image.cols/2, 50);
-        putText(image, str_advice, advice_display, FONT_HERSHEY_PLAIN, 2, Scalar(255,0,0), 2);
+        putText(image, str_advice, advice_display, FONT_HERSHEY_PLAIN, 4, Scalar(255,0,0), 3);
     } else {
         cout << "no rects detected" << endl;
     }
