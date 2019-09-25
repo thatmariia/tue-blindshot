@@ -5,10 +5,11 @@
 #import <iostream>
 #import <math.h>
 
-#define ADVICE_LEFT  2
-#define ADVICE_RIGHT 3
-#define ADVICE_UP    4
-#define ADVICE_DOWN  5
+#define ADVICE_SHOOT 2
+#define ADVICE_LEFT  3
+#define ADVICE_RIGHT 4
+#define ADVICE_UP    5
+#define ADVICE_DOWN  6
 
 //#define PI 3.1415926535
 #define _USE_MATH_DEFINES
@@ -182,11 +183,15 @@ bool compareContourAreas (vector<cv::Point> contour1, vector<cv::Point> contour2
     return ( i > j );
 }
 
-int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
+int getAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Mat image) {
     
     float so = abs( target.y - frame.y );
     float fo = abs( target.x - frame.x );
     float sf = sqrt( pow(so,2) + pow(fo,2) );
+    
+    if (sf <= allowed_dist){
+        return ADVICE_SHOOT;
+    }
     
     float gamma = asinf(so / sf);
     float psi = (M_PI/2) - gamma;
@@ -289,9 +294,13 @@ int getAdvice (cv::Point target, cv::Point frame, cv::Mat image) {
         string str_targetRect_center = to_string(targetRect.center.x) + ", " + to_string(targetRect.center.y);
         putText(image, str_targetRect_center, targetRect.center, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
         
-        int advice = getAdvice(targetRect.center, image_center, image);
+        float allowed_dist = ((targetRect.size.height + targetRect.size.width)/2) * 0.2;
+        
+        int advice = getAdvice(allowed_dist, targetRect.center, image_center, image);
         string str_advice;
         switch (advice) {
+            case ADVICE_SHOOT : str_advice = "SHOOT";
+                                break;
             case ADVICE_LEFT  : str_advice = "LEFT";
                                 break;
             case ADVICE_RIGHT : str_advice = "RIGHT";
