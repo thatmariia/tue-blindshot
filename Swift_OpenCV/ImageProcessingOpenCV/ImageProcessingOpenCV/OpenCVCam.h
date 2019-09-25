@@ -13,7 +13,6 @@
 #import <opencv2/opencv.hpp>
 #import <opencv2/videoio/cap_ios.h>
 #import "OpenCVCamDelegate.h"
-#import "Bot.h"
 
 @interface OpenCVCam : NSObject<CvVideoCameraDelegate>
 

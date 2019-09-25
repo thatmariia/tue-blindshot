@@ -2,9 +2,11 @@
 #import "OpenCVCam.h"
 #import "UIImage+OpenCV.h"
 #import "color.h"
-#include "Bot.h"
+#import <iostream>
+#import <math.h>
 
-#define PI 3.1415926535
+//#define PI 3.1415926535
+#define _USE_MATH_DEFINES
 
 using namespace cv;
 using namespace std;
@@ -167,15 +169,21 @@ Mat drawRects( Mat& image, const vector<vector<cv::Point> >& rects ) {
         int n = (int)rects[i].size();
         //dont detect the border
         if (p-> x > 3 && p->y > 3)
-          polylines(image, &p, &n, 1, true, Scalar(0,255,0), 3, LINE_AA);
+          polylines(image, &p, &n, 1, true, Scalar(0,255,0), 1, LINE_AA);
     }
     return image;
 }
 
-bool compareContourAreas ( std::vector<cv::Point> contour1, std::vector<cv::Point> contour2 ) {
+bool compareContourAreas (vector<cv::Point> contour1, vector<cv::Point> contour2 ) {
     double i = fabs( contourArea(cv::Mat(contour1)) );
     double j = fabs( contourArea(cv::Mat(contour2)) );
     return ( i > j );
+}
+
+float getDeviationAngle (cv::Point target, cv::Point frame) {
+    float dev_angle = 0.0;
+    
+    return dev_angle;
 }
 
 
@@ -210,14 +218,24 @@ bool compareContourAreas ( std::vector<cv::Point> contour1, std::vector<cv::Poin
     image = findRects(image, rects);
     image = drawRects(image, rects);
     
-    // pick the 1 detected square
+    
     if (rects.size() > 0){
         std::sort(rects.begin(), rects.end(), compareContourAreas);
         auto cnt = rects.at(0);
+        // pick the 1 detected square
         auto targetRect = minAreaRect(cnt);
-        //targetRect.center;
-        cv::Point imageCenter = cv::Point( image.cols/2, image.rows/2 );
-        line(image, targetRect.center, imageCenter, Scalar(255,255,0), 4);
+        
+        // drawing a line from target to image center
+        cv::Point image_center = cv::Point( image.cols/2, image.rows/2 );
+        line(image, targetRect.center, image_center, Scalar(255,255,0), 4);
+        
+        // displaying coordinates
+        string str_image_center = to_string(image_center.x) + ", " + to_string(image_center.y);
+        putText(image, str_image_center, image_center, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        string str_targetRect_center = to_string(targetRect.center.x) + ", " + to_string(targetRect.center.y);
+        putText(image, str_targetRect_center, targetRect.center, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
+        
+        float dev_angle = getDeviationAngle(targetRect.center, image_center);
     } else {
         cout << "no rects detected" << endl;
     }
