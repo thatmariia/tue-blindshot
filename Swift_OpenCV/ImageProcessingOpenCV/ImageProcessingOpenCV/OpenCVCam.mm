@@ -181,9 +181,14 @@ bool compareContourAreas (vector<cv::Point> contour1, vector<cv::Point> contour2
 }
 
 float getDeviationAngle (cv::Point target, cv::Point frame) {
-    float dev_angle = 0.0;
+    float so = abs( target.y - frame.y );
+    float fo = abs( target.x - frame.x );
+    float sf = sqrt( pow(so,2) + pow(fo,2) );
     
-    return dev_angle;
+    float gamma = asinf(so / sf);
+    float psi = (M_PI/2) - gamma;
+    
+    return psi;
 }
 
 
@@ -218,6 +223,7 @@ float getDeviationAngle (cv::Point target, cv::Point frame) {
     image = findRects(image, rects);
     image = drawRects(image, rects);
     
+    float psi;
     
     if (rects.size() > 0){
         std::sort(rects.begin(), rects.end(), compareContourAreas);
@@ -235,7 +241,7 @@ float getDeviationAngle (cv::Point target, cv::Point frame) {
         string str_targetRect_center = to_string(targetRect.center.x) + ", " + to_string(targetRect.center.y);
         putText(image, str_targetRect_center, targetRect.center, FONT_HERSHEY_PLAIN, 2, Scalar(255,255,255), 2);
         
-        float dev_angle = getDeviationAngle(targetRect.center, image_center);
+        psi = getDeviationAngle(targetRect.center, image_center);
     } else {
         cout << "no rects detected" << endl;
     }
