@@ -183,7 +183,7 @@ bool compareContourAreas ( std::vector<cv::Point> contour1, std::vector<cv::Poin
 {
     
     // mask to only have white colors
-    
+    cout << "blaaaah" << endl;
     Mat hsv;
     Mat targetmask, targetmasklow, targetmaskhigh;
     
