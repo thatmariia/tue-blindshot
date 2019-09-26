@@ -5,13 +5,14 @@
 #import <iostream>
 #import <math.h>
 
+#define ADVICE_NOT_DETECTED 0
+#define ADVICE_DETECTED     1
 #define ADVICE_SHOOT 2
 #define ADVICE_LEFT  3
 #define ADVICE_RIGHT 4
 #define ADVICE_UP    5
 #define ADVICE_DOWN  6
 
-//#define PI 3.1415926535
 #define _USE_MATH_DEFINES
 
 using namespace cv;
@@ -278,6 +279,8 @@ int getAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Mat im
     image = findRects(image, rects);
     image = drawRects(image, rects);
     
+    int advice;
+    
     if (rects.size() > 0){
         std::sort(rects.begin(), rects.end(), compareContourAreas);
         auto cnt = rects.at(0);
@@ -296,7 +299,7 @@ int getAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Mat im
         
         float allowed_dist = ((targetRect.size.height + targetRect.size.width)/2) * 0.2;
         
-        int advice = getAdvice(allowed_dist, targetRect.center, image_center, image);
+        advice = getAdvice(allowed_dist, targetRect.center, image_center, image);
         string str_advice;
         switch (advice) {
             case ADVICE_SHOOT : str_advice = "SHOOT";
@@ -313,11 +316,17 @@ int getAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Mat im
         cv::Point advice_display = cv::Point(image.cols/2, 50);
         putText(image, str_advice, advice_display, FONT_HERSHEY_PLAIN, 4, Scalar(255,0,0), 3);
     } else {
-        cout << "no rects detected" << endl;
+        //cout << "no rects detected" << endl;
+        advice = ADVICE_NOT_DETECTED;
     }
+    
+    std::string cppString = to_string(advice);
+    NSString *objcMessage = [NSString stringWithCString:cppString.c_str()
+                            encoding:[NSString defaultCStringEncoding]];;
     
 
     if (self.delegate != nil) {
+        [self.delegate adviceUpdate:objcMessage];
         cvtColor(image,image, COLOR_BGR2RGB);
         [self.delegate imageProcessed:[UIImage imageWithCVMat: image]];
     }

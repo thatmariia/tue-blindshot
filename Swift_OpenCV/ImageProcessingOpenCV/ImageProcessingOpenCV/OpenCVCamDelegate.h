@@ -11,7 +11,7 @@
 
 @protocol OpenCVCamDelegate <NSObject>
 - (void) imageProcessed: (UIImage*) image;
-//- (void) botUpdate: (NSString*) message;
+- (void) adviceUpdate: (NSString*) message;
 @end
 
 #endif /* OpenCVCamDelegate_h */
