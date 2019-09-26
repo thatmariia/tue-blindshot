@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ImageProcessingOpenCV.xcodeproj">
+      location = "group:../../../../../audios/english/not_detetcted.m4a">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

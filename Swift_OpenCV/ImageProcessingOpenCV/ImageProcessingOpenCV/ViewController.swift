@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
+import Foundation
 
 class ViewController: UIViewController, OpenCVCamDelegate {
     
-    let advice_lib : [String : String] = ["0" : "not detected",
+    let advice_lib : [String : String] = ["0" : "not_detected",
                                           "1" : "detected",
                                           "2" : "shoot",
                                           "3" : "left",
@@ -24,15 +26,16 @@ class ViewController: UIViewController, OpenCVCamDelegate {
     
     @IBOutlet weak var stopButton: UIButton!
     
-    @IBOutlet weak var adviceLabel: UILabel!
-    
     var startTime = CFAbsoluteTimeGetCurrent()
     
     var openCVWrapper: OpenCVWrapper!
     
     var lastTimeSet: Double = 0
     
-    var advice : String = "no info";
+    var advice : String = "not_detected"
+    
+    var audioPlayer: AVAudioPlayer? = nil
+    var currentAudio : String = "none"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +45,14 @@ class ViewController: UIViewController, OpenCVCamDelegate {
         stopButton.backgroundColor = UIColor(red:1.00, green:0.27, blue:0.00, alpha:1.0)
         stopButton.layer.cornerRadius = 8
         
-        //adviceLabel.text = "meow"
-        
         print("\(OpenCVWrapper.openCVVersionString())")
         
         openCVWrapper = OpenCVWrapper()
         openCVWrapper.setDelegate(self)
 
         openCVWrapper.start()
+        
+        playAdvice()
     }
 
 
@@ -60,11 +63,11 @@ class ViewController: UIViewController, OpenCVCamDelegate {
     }
     
     func adviceUpdate(_ message: String!) {
-        advice = message
         if let new_advice =  advice_lib[message]{
-           print("****** NEW ADVICE : " + "\(new_advice)")
+            advice = new_advice
+            playAdvice()
+            print("****** NEW ADVICE : " + "\(new_advice)")
         }
-        
     }
     
     
@@ -75,4 +78,43 @@ class ViewController: UIViewController, OpenCVCamDelegate {
     @IBAction func stop(_ button: UIButton) {
         openCVWrapper.stop()
     }
+    
+    func playAdvice () {
+        
+        // quit if no message or the message has been received before
+        if (currentAudio == advice) { return }
+        
+        // stop playing currently played advice
+        if (currentAudio != "none"){
+            audioCommunicate(fileName: currentAudio, stop: true)
+        }
+        
+        // loop play newly received message
+        currentAudio = advice
+        audioCommunicate(fileName: currentAudio, stop: false)
+        
+    }
+    
+    func audioCommunicate (fileName : String, stop : Bool) {
+        
+        let soundURL = Bundle.main.url(forResource: fileName, withExtension: "m4a")
+        //let path = Bundle.main.path(forResource: fileName, ofType: "m4a")!
+        //let soundNSURL = NSURL(fileURLWithPath: path)
+        //let soundURL : URL = soundNSURL as URL
+        
+        print("sound URL *** ", soundURL as Any)
+        
+        do {
+            try audioPlayer = AVAudioPlayer.init(contentsOf: soundURL!)
+            if (stop){
+                audioPlayer?.stop()
+            } else {
+                audioPlayer?.numberOfLoops = -1
+                audioPlayer?.play()
+            }
+        } catch {
+            print("Error playing sound")
+        }
+    }
+    
 }
