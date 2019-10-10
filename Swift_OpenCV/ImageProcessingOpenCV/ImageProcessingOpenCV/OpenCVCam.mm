@@ -15,6 +15,8 @@
 
 #define _USE_MATH_DEFINES
 
+#define SENSITIVITY 70
+
 using namespace cv;
 using namespace std;
 
@@ -23,14 +25,16 @@ using namespace std;
 cv::Point intersection = cv::Point(0, 0);
 
 Color targetcolor_l("targetcolor_l",
-           Scalar(0, 100, 100),
-           Scalar(3, 255, 255));
+           //Scalar(0, 0, 170),
+           //Scalar(140, 60, 255));
+            Scalar(0, 0, 255-SENSITIVITY),
+            Scalar(0, 0, 255));
 
 Color targetcolor_h("targetcolor_h",
-           Scalar(160, 100, 100),
-           Scalar(179, 255, 255));
-
-vector<Color> colors;
+           //Scalar(200, 200, 200),
+           //Scalar(255, 255, 255));
+            Scalar(0, 0, 255-(SENSITIVITY/1.5)),
+            Scalar(255, 255, 255));
 
 + (id)sharedInstance {
     static OpenCVCam *instance = nil;
@@ -80,13 +84,6 @@ double angle( cv::Point pt1, cv::Point pt2, cv::Point pt0 ) {
 Mat findRects( const Mat& image, vector<vector<cv::Point> >& rects ) {
    
     rects.clear();
-
-//s    Mat pyr, timg, gray0(image.size(), CV_8U), gray;
-
-    // down-scale and upscale the image to filter out the noise
-    //pyrDown(image, pyr, Size(image.cols/2, image.rows/2));
-    //pyrUp(pyr, timg, image.size());
-
 
     // blur will enhance edge detection
     Mat timg(image);
@@ -258,7 +255,7 @@ int getAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Mat im
     
     cvtColor(image, hsv, COLOR_BGR2HSV);
     
-    // Detect red area in frame
+    // Detect white area in frame
     inRange(hsv, targetcolor_l.low, targetcolor_l.high,  targetmasklow);
     inRange(hsv, targetcolor_h.low, targetcolor_h.high, targetmaskhigh);
     

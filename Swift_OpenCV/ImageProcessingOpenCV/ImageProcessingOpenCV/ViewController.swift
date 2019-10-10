@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  ImageProcessingOpenCV
 //
-//  Created by Mariia Turchina on 23/05/2019.
+//  Created by Mariia Turchina on 25/09/2019.
 //  Copyright © 2019 Mariia Turchina. All rights reserved.
 //
 
@@ -39,6 +39,8 @@ class ViewController: UIViewController, OpenCVCamDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.isIdleTimerDisabled = true
         
         startButton.backgroundColor = UIColor(red:0.20, green:0.80, blue:0.20, alpha:1.0)
         startButton.layer.cornerRadius = 8
@@ -78,43 +80,4 @@ class ViewController: UIViewController, OpenCVCamDelegate {
     @IBAction func stop(_ button: UIButton) {
         openCVWrapper.stop()
     }
-    
-    func playAdvice () {
-        
-        // quit if no message or the message has been received before
-        if (currentAudio == advice) { return }
-        
-        // stop playing currently played advice
-        if (currentAudio != "none"){
-            audioCommunicate(fileName: currentAudio, stop: true)
-        }
-        
-        // loop play newly received message
-        currentAudio = advice
-        audioCommunicate(fileName: currentAudio, stop: false)
-        
-    }
-    
-    func audioCommunicate (fileName : String, stop : Bool) {
-        
-        let soundURL = Bundle.main.url(forResource: fileName, withExtension: "m4a")
-        //let path = Bundle.main.path(forResource: fileName, ofType: "m4a")!
-        //let soundNSURL = NSURL(fileURLWithPath: path)
-        //let soundURL : URL = soundNSURL as URL
-        
-        print("sound URL *** ", soundURL as Any)
-        
-        do {
-            try audioPlayer = AVAudioPlayer.init(contentsOf: soundURL!)
-            if (stop){
-                audioPlayer?.stop()
-            } else {
-                audioPlayer?.numberOfLoops = -1
-                audioPlayer?.play()
-            }
-        } catch {
-            print("Error playing sound")
-        }
-    }
-    
 }

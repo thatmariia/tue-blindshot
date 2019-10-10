@@ -2,7 +2,7 @@
 //  deblur.hpp
 //  ImageProcessingOpenCV
 //
-//  Created by Mariia Turchina on 29/05/2019.
+//  Created by Mariia Turchina on 25/09/2019.
 //  Copyright © 2019 Mariia Turchina. All rights reserved.
 //
 

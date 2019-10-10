@@ -2,7 +2,7 @@
 //  UIImage+OpenCV.h
 //  ImageProcessingOpenCV
 //
-//  Created by Mariia Turchina on 23/05/2019.
+//  Created by Mariia Turchina on 25/09/2019.
 //  Copyright © 2019 Mariia Turchina. All rights reserved.
 //
 
