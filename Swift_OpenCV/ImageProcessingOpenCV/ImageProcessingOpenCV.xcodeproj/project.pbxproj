@@ -18,6 +18,7 @@
 		313F7D52233D18D30050A2C7 /* up.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 313F7D41233D14150050A2C7 /* up.m4a */; };
 		313F7D58233D6A490050A2C7 /* AVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7D57233D6A490050A2C7 /* AVController.swift */; };
 		3164E1EA229E014000F587FB /* ObjectiveCPP in Sources */ = {isa = PBXBuildFile; fileRef = 3164E1E9229E014000F587FB /* ObjectiveCPP */; };
+		317B681D2350A19400E8B400 /* ImageOpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 317B681C2350A19400E8B400 /* ImageOpenCVWrapper.mm */; };
 		3181C99D234FD8C400BFB893 /* test1.h264 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C99C234FD8C400BFB893 /* test1.h264 */; };
 		3181C9A1234FE42C00BFB893 /* IMG_4129.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A0234FE42B00BFB893 /* IMG_4129.MP4 */; };
 		3181C9A3234FE59D00BFB893 /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A2234FE59D00BFB893 /* test1.mp4 */; };
@@ -81,6 +82,8 @@
 		3164E1E5229E00EC00F587FB /* ObjectiveCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjectiveCPP; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP/include/ObjectiveCPP"; sourceTree = "<group>"; };
 		3164E1E6229E00EC00F587FB /* ObjectiveCPP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ObjectiveCPP.hpp; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP/include/ObjectiveCPP.hpp"; sourceTree = "<group>"; };
 		3164E1E9229E014000F587FB /* ObjectiveCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjectiveCPP; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP"; sourceTree = "<group>"; };
+		317B681B2350A10D00E8B400 /* ImageOpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageOpenCVWrapper.h; sourceTree = "<group>"; };
+		317B681C2350A19400E8B400 /* ImageOpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageOpenCVWrapper.mm; sourceTree = "<group>"; };
 		3181C99C234FD8C400BFB893 /* test1.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.h264; sourceTree = "<group>"; };
 		3181C9A0234FE42B00BFB893 /* IMG_4129.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_4129.MP4; sourceTree = "<group>"; };
 		3181C9A2234FE59D00BFB893 /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				318634C22296021A00187D5C /* OpenCVWrapper.h */,
 				3181C99C234FD8C400BFB893 /* test1.h264 */,
 				318634C32296021A00187D5C /* OpenCVWrapper.mm */,
+				317B681B2350A10D00E8B400 /* ImageOpenCVWrapper.h */,
+				317B681C2350A19400E8B400 /* ImageOpenCVWrapper.mm */,
 				3181C9A6234FF8BD00BFB893 /* IMG_4053.MOV */,
 				318634C52296032C00187D5C /* PrefixHeader.pch */,
 				3186348D2295FE9400187D5C /* AppDelegate.swift */,
@@ -416,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				317B681D2350A19400E8B400 /* ImageOpenCVWrapper.mm in Sources */,
 				3164E1EA229E014000F587FB /* ObjectiveCPP in Sources */,
 				313F7D58233D6A490050A2C7 /* AVController.swift in Sources */,
 				3139FB70229F369100F2477C /* deblur.cpp in Sources */,
