@@ -6,18 +6,27 @@
 //  Copyright © 2019 Mariia Turchina. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "OpenCVCamDelegate.h"
+#import <opencv2/opencv.hpp>
+#import <opencv2/videoio/cap_ios.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageOpenCVWrapper : NSObject
+@interface ImageOpenCVWrapper : NSObject<CvVideoCameraDelegate>
+
+@property CvVideoCamera* cam;
+@property id<OpenCVCamDelegate> delegate;
 
 + (NSString *)openCVVersionString;
 
-- (void)setDelegate: (id<OpenCVCamDelegate>) delegate;
-+ (void)passImage:(UIImage *)image;
++ (id) sharedInstance;
+
+//- (void)setDelegate: (id<OpenCVCamDelegate>) delegate;
+
++ (void)processingImage:(cv::Mat &)image;
 
 @end
 

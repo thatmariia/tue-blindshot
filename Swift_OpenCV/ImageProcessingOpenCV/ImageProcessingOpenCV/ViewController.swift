@@ -31,6 +31,7 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
     var startTime = CFAbsoluteTimeGetCurrent()
     
     var openCVWrapper: OpenCVWrapper!
+    var imageOpenCVWrapper : ImageOpenCVWrapper!
     
     var lastTimeSet: Double = 0
     

@@ -3,4 +3,5 @@
 //
 
 #import "OpenCVWrapper.h"
+#import "ImageOpenCVWrapper.h"
 
