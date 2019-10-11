@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,9 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kqf-Yu-Upv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="750"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="K5c-HW-g5a">
                                 <rect key="frame" x="92" y="802" width="230" height="30"/>
                                 <subviews>
@@ -50,20 +47,33 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qu7-HC-8pr" userLabel="Image View2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="398"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kqf-Yu-Upv">
+                                <rect key="frame" x="0.0" y="442" width="414" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="FSg-yX-DEo"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Kqf-Yu-Upv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0mc-iU-YsY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="K5c-HW-g5a" secondAttribute="bottom" constant="30" id="268-6L-mrD"/>
-                            <constraint firstItem="K5c-HW-g5a" firstAttribute="top" secondItem="Kqf-Yu-Upv" secondAttribute="bottom" constant="8" id="GmR-nd-RQJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qu7-HC-8pr" secondAttribute="trailing" id="6QO-t0-z7F"/>
+                            <constraint firstItem="K5c-HW-g5a" firstAttribute="top" secondItem="Kqf-Yu-Upv" secondAttribute="bottom" constant="10" id="B5X-jP-Yfy"/>
+                            <constraint firstItem="Kqf-Yu-Upv" firstAttribute="top" secondItem="qu7-HC-8pr" secondAttribute="bottom" id="Efh-Ft-m9w"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kqf-Yu-Upv" secondAttribute="trailing" id="HPI-r6-Yd8"/>
                             <constraint firstItem="K5c-HW-g5a" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R2e-nL-IWQ"/>
-                            <constraint firstItem="Kqf-Yu-Upv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="laN-H6-0Oi"/>
-                            <constraint firstItem="Kqf-Yu-Upv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xcN-0U-pcY"/>
+                            <constraint firstItem="Kqf-Yu-Upv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WAu-zl-G8k"/>
+                            <constraint firstItem="qu7-HC-8pr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="boU-Af-dqa"/>
+                            <constraint firstItem="qu7-HC-8pr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cdp-cN-HXB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Kqf-Yu-Upv" id="UTl-HO-hJv"/>
+                        <outlet property="image_h264" destination="qu7-HC-8pr" id="c8O-Mj-2fR"/>
                         <outlet property="startButton" destination="R4y-QX-12t" id="3Qx-1v-SgT"/>
                         <outlet property="stopButton" destination="1t7-NF-gs2" id="PSt-ZL-MIs"/>
                     </connections>

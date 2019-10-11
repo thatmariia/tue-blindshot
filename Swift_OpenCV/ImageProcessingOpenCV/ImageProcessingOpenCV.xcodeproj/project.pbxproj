@@ -18,6 +18,11 @@
 		313F7D52233D18D30050A2C7 /* up.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 313F7D41233D14150050A2C7 /* up.m4a */; };
 		313F7D58233D6A490050A2C7 /* AVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313F7D57233D6A490050A2C7 /* AVController.swift */; };
 		3164E1EA229E014000F587FB /* ObjectiveCPP in Sources */ = {isa = PBXBuildFile; fileRef = 3164E1E9229E014000F587FB /* ObjectiveCPP */; };
+		3181C99D234FD8C400BFB893 /* test1.h264 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C99C234FD8C400BFB893 /* test1.h264 */; };
+		3181C9A1234FE42C00BFB893 /* IMG_4129.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A0234FE42B00BFB893 /* IMG_4129.MP4 */; };
+		3181C9A3234FE59D00BFB893 /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A2234FE59D00BFB893 /* test1.mp4 */; };
+		3181C9A5234FE7BF00BFB893 /* foxVillage.m3u8 in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A4234FE7BF00BFB893 /* foxVillage.m3u8 */; };
+		3181C9A7234FF8BD00BFB893 /* IMG_4053.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 3181C9A6234FF8BD00BFB893 /* IMG_4053.MOV */; };
 		3186348E2295FE9400187D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3186348D2295FE9400187D5C /* AppDelegate.swift */; };
 		318634902295FE9400187D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3186348F2295FE9400187D5C /* ViewController.swift */; };
 		318634932295FE9400187D5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 318634912295FE9400187D5C /* Main.storyboard */; };
@@ -76,6 +81,11 @@
 		3164E1E5229E00EC00F587FB /* ObjectiveCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjectiveCPP; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP/include/ObjectiveCPP"; sourceTree = "<group>"; };
 		3164E1E6229E00EC00F587FB /* ObjectiveCPP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ObjectiveCPP.hpp; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP/include/ObjectiveCPP.hpp"; sourceTree = "<group>"; };
 		3164E1E9229E014000F587FB /* ObjectiveCPP */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ObjectiveCPP; path = "../../../../Downloads/Objective-CPP-master/ObjectiveCPP"; sourceTree = "<group>"; };
+		3181C99C234FD8C400BFB893 /* test1.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.h264; sourceTree = "<group>"; };
+		3181C9A0234FE42B00BFB893 /* IMG_4129.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_4129.MP4; sourceTree = "<group>"; };
+		3181C9A2234FE59D00BFB893 /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
+		3181C9A4234FE7BF00BFB893 /* foxVillage.m3u8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = foxVillage.m3u8; sourceTree = "<group>"; };
+		3181C9A6234FF8BD00BFB893 /* IMG_4053.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_4053.MOV; sourceTree = "<group>"; };
 		3186348A2295FE9400187D5C /* ImageProcessingOpenCV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageProcessingOpenCV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3186348D2295FE9400187D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3186348F2295FE9400187D5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -197,10 +207,15 @@
 			children = (
 				313F7D40233D12520050A2C7 /* sounds */,
 				318634C22296021A00187D5C /* OpenCVWrapper.h */,
+				3181C99C234FD8C400BFB893 /* test1.h264 */,
 				318634C32296021A00187D5C /* OpenCVWrapper.mm */,
+				3181C9A6234FF8BD00BFB893 /* IMG_4053.MOV */,
 				318634C52296032C00187D5C /* PrefixHeader.pch */,
 				3186348D2295FE9400187D5C /* AppDelegate.swift */,
+				3181C9A2234FE59D00BFB893 /* test1.mp4 */,
 				3186348F2295FE9400187D5C /* ViewController.swift */,
+				3181C9A4234FE7BF00BFB893 /* foxVillage.m3u8 */,
+				3181C9A0234FE42B00BFB893 /* IMG_4129.MP4 */,
 				313F7D57233D6A490050A2C7 /* AVController.swift */,
 				318634912295FE9400187D5C /* Main.storyboard */,
 				318634972295FE9700187D5C /* Assets.xcassets */,
@@ -362,14 +377,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				313F7D50233D16940050A2C7 /* up.m4a in Resources */,
+				3181C9A5234FE7BF00BFB893 /* foxVillage.m3u8 in Resources */,
 				3186349B2295FE9700187D5C /* LaunchScreen.storyboard in Resources */,
 				313F7D49233D14160050A2C7 /* left.m4a in Resources */,
+				3181C99D234FD8C400BFB893 /* test1.h264 in Resources */,
 				313F7D4B233D14160050A2C7 /* not_detected.m4a in Resources */,
+				3181C9A7234FF8BD00BFB893 /* IMG_4053.MOV in Resources */,
+				3181C9A3234FE59D00BFB893 /* test1.mp4 in Resources */,
 				313F7D4C233D14160050A2C7 /* right.m4a in Resources */,
 				313F7D4A233D14160050A2C7 /* detected.m4a in Resources */,
 				318634982295FE9700187D5C /* Assets.xcassets in Resources */,
 				318634932295FE9400187D5C /* Main.storyboard in Resources */,
 				313F7D48233D14160050A2C7 /* down.m4a in Resources */,
+				3181C9A1234FE42C00BFB893 /* IMG_4129.MP4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
