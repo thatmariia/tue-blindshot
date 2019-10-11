@@ -30,7 +30,7 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
     
     var startTime = CFAbsoluteTimeGetCurrent()
     
-    var openCVWrapper: OpenCVWrapper!
+    //var openCVWrapper: OpenCVWrapper!
     var imageOpenCVWrapper : ImageOpenCVWrapper!
     
     var lastTimeSet: Double = 0
@@ -56,12 +56,12 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
         stopButton.backgroundColor = UIColor(red:1.00, green:0.27, blue:0.00, alpha:1.0)
         stopButton.layer.cornerRadius = 8
         
-        print("\(OpenCVWrapper.openCVVersionString())")
+        print("\(ImageOpenCVWrapper.openCVVersionString())")
         
-        openCVWrapper = OpenCVWrapper()
+        /*openCVWrapper = OpenCVWrapper()
         openCVWrapper.setDelegate(self)
 
-        openCVWrapper.start()
+        openCVWrapper.start()*/
         
         playAdvice()
         
@@ -131,10 +131,10 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
     
     
     @IBAction func start(_ button: UIButton) {
-        openCVWrapper.start()
+        //openCVWrapper.start()
     }
     
     @IBAction func stop(_ button: UIButton) {
-        openCVWrapper.stop()
+        //openCVWrapper.stop()
     }
 }
