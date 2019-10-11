@@ -67,9 +67,9 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
         // H264 decoding
         //let videoURL = Bundle.main.url(forResource: "foxVillage", withExtension: "m3u8")
         //let url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        //let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
+        let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
         //let url = "https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4"
-        let url = "http://192.168.1.121:8080/video"
+        //let url = "http://192.168.1.121:8080/video"
         //let url = "rtsp://192.168.1.121:8080/h264_pcm.sdp"
         let videoURL = URL(string: url)
         let asset = AVURLAsset(url: videoURL!, options: nil)

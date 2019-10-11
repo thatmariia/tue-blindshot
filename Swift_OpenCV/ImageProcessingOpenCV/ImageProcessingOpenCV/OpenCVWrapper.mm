@@ -34,4 +34,11 @@
     [cvCam stop];
 }
 
++ (void)passImage:(UIImage *)image
+{
+    // WTF DO I WRITE HERRERERERERERRE BLAAAAAH
+}
+
+
+
 @end
