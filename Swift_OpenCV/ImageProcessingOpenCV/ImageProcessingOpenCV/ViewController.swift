@@ -56,7 +56,7 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
         stopButton.backgroundColor = UIColor(red:1.00, green:0.27, blue:0.00, alpha:1.0)
         stopButton.layer.cornerRadius = 8
         
-        print("\(ImageOpenCVWrapper.openCVVersionString())")
+        //print("\(ImageOpenCVWrapper.openCVVersionString())")
         
         /*openCVWrapper = OpenCVWrapper()
         openCVWrapper.setDelegate(self)

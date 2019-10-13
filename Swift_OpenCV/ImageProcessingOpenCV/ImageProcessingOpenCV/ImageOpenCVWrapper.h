@@ -10,23 +10,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "OpenCVCamDelegate.h"
-#import <opencv2/opencv.hpp>
-#import <opencv2/videoio/cap_ios.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageOpenCVWrapper : NSObject<CvVideoCameraDelegate>
-
-@property CvVideoCamera* cam;
-@property id<OpenCVCamDelegate> delegate;
+@interface ImageOpenCVWrapper : NSObject
 
 + (NSString *)openCVVersionString;
 
-+ (id) sharedInstance;
+//+ (id) sharedInstance;
 
 //- (void)setDelegate: (id<OpenCVCamDelegate>) delegate;
 
-+ (void)processingImage:(cv::Mat &)image;
++ (void)processingImage:(UIImage *)image;
 
 @end
 

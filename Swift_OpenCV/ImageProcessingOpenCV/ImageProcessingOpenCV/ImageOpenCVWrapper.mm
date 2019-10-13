@@ -1,5 +1,5 @@
 //
-//  ImageOpenCVWrapper.m
+//  ImageOpenCVWrapper.mm
 //  ImageProcessingOpenCV
 //
 //  Created by Mariia Turchina on 11/10/2019.
@@ -10,10 +10,10 @@
 #import <opencv2/opencv.hpp>
 #import "ImageOpenCVWrapper.h"
 #import "UIImage+OpenCV.h"
-#import "OpenCVCam.h"
 #import "color.h"
 #import <iostream>
 #import <math.h>
+#import <opencv2/opencv.hpp>
 
 #define SENSITIVITY 70
 
@@ -39,7 +39,7 @@ Color targetcol_h("targetcolor_h",
     OpenCVCam* cvCam = [OpenCVCam sharedInstance];
     cvCam.delegate = delegate;
 }*/
-
+/*
 + (id)sharedInstance {
     static OpenCVCam *instance = nil;
     static dispatch_once_t onceToken;
@@ -50,6 +50,7 @@ Color targetcol_h("targetcolor_h",
     return instance;
 }
 
+  */
 
 + (void)processingImage:(cv::Mat &)image {
     // mask to only have white colors
@@ -76,10 +77,8 @@ Color targetcol_h("targetcolor_h",
     image = targetframe;
 }
 
-
-
-- (void)processImage:(cv::Mat &)image { 
-    
+- (void)processImage:(cv::Mat &)image {
+    // weirdddd
 }
 
 @end
