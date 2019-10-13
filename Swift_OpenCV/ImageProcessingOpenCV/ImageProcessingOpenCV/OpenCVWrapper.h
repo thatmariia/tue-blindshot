@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDelegate: (id<OpenCVCamDelegate>) delegate;
 - (void)start;
 - (void)stop;
-+ (void)passImage:(UIImage *)image;
++ (void)processImage:(UIImage *)image;
 
 @end
 

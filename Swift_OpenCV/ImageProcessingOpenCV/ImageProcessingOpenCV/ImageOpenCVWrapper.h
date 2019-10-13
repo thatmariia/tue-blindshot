@@ -13,15 +13,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef struct Result {
+    int advice;
+    UIImage * image;
+} Result;
+
 @interface ImageOpenCVWrapper : NSObject
 
 + (NSString *)openCVVersionString;
 
-//+ (id) sharedInstance;
-
-//- (void)setDelegate: (id<OpenCVCamDelegate>) delegate;
-
-+ (void)processingImage:(UIImage *)image;
++ (Result)processingImage:(UIImage *)image;
 
 @end
 
