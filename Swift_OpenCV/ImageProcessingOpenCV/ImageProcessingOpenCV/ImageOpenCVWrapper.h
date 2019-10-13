@@ -22,7 +22,7 @@ typedef struct Result {
 
 + (NSString *)openCVVersionString;
 
-+ (Result)processingImage:(UIImage *)image;
+- (void)processingImage : (UIImage *)image;
 
 @end
 

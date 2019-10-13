@@ -12,7 +12,12 @@ import AVKit
 import AVFoundation
 import Foundation
 
-class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoaderDelegate {
+struct Result {
+    var advice : Int
+    var image : UIImage
+}
+
+class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
     
     let advice_lib : [String : String] = ["0" : "not_detected",
                                           "1" : "detected",
@@ -56,7 +61,7 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
         stopButton.backgroundColor = UIColor(red:1.00, green:0.27, blue:0.00, alpha:1.0)
         stopButton.layer.cornerRadius = 8
         
-        //print("\(ImageOpenCVWrapper.openCVVersionString())")
+        print("\(ImageOpenCVWrapper.openCVVersionString())")
         
         /*openCVWrapper = OpenCVWrapper()
         openCVWrapper.setDelegate(self)
@@ -95,29 +100,30 @@ class ViewController: UIViewController, OpenCVCamDelegate, AVAssetResourceLoader
     }
 
     
-    func imageProcessed(_ image: UIImage) {
+    func execute() {
         DispatchQueue.main.async {
-            self.imageView.image = image
+            while true {
             
             // Decoder
-            
             let time = self.output.itemTime(forHostTime: CACurrentMediaTime())
             print(time)
             
             if self.output.hasNewPixelBuffer(forItemTime: time) {
                 let cvPixelBuffer = self.output.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil)
-              let ciImage = CIImage(cvImageBuffer: cvPixelBuffer!)
-              let temporaryContext = CIContext();
+                let ciImage = CIImage(cvImageBuffer: cvPixelBuffer!)
+                let temporaryContext = CIContext();
               
-              let width = CVPixelBufferGetWidth(cvPixelBuffer!)
-              let height = CVPixelBufferGetHeight(cvPixelBuffer!)
-              let cgRect = CGRect(x: 0,y: 0, width: width, height: height)
+                let width = CVPixelBufferGetWidth(cvPixelBuffer!)
+                let height = CVPixelBufferGetHeight(cvPixelBuffer!)
+                let cgRect = CGRect(x: 0,y: 0, width: width, height: height)
               
-              let cgImage = temporaryContext.createCGImage(ciImage, from: cgRect)
-              
-              //let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: &actualTime)
-                self.image_h264.image = UIImage(cgImage: cgImage!)
-              }
+                let cgImage = temporaryContext.createCGImage(ciImage, from: cgRect)
+                let uiImage = UIImage(cgImage: cgImage!)
+                //var uiImagePtr = UnsafeMutablePointer<UIImage>(&uiImage)
+
+                self.imageOpenCVWrapper.processingImage(uiImage)
+                }
+            }
         }
     }
     

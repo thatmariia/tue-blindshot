@@ -220,8 +220,10 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
 }
 
 
-- (Result)processingImage:(cv::Mat &)
-image {
+- (void)processingImage:(cv::Mat &) image {
+    
+    //cv::Mat image =
+    
     // mask to only have white colors
     Mat hsv;
     Mat targetmask, targetmasklow, targetmaskhigh;
