@@ -220,7 +220,7 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
 }
 
 
-- (void)processingImage:(cv::Mat &) image {
++ (void)processingImage:(cv::Mat &) image {
     
     //cv::Mat image =
     

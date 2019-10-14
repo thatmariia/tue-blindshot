@@ -37,7 +37,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
     var startTime = CFAbsoluteTimeGetCurrent()
     
     //var openCVWrapper: OpenCVWrapper!
-    var imageOpenCVWrapper : ImageOpenCVWrapper!
+    var imageOpenCVWrapper = ImageOpenCVWrapper()
     
     var lastTimeSet: Double = 0
     
@@ -152,7 +152,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
                 let cgImage = temporaryContext.createCGImage(ciImage, from: cgRect)
                 let uiImage = UIImage(cgImage: cgImage!)
                 
-                //self.imageOpenCVWrapper.processingImage(uiImage)
+                //self.ImageOpenCVWrapper.processingImage(uiImage)
                 
                 //self.imageView.image = uiImage
                 self.image_h264.image = uiImage
