@@ -93,16 +93,38 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
             
             player?.currentItem?.add(output)
             player?.play()
+        
+        setTimer()
+        //execute()
     }
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         return true
     }
+    
+    func setTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fire(timer:)), userInfo: nil, repeats: true)
+        secLeft = 600
+        print("TIMER SET")
+    }
+    
+    var timer = Timer()
+    var secLeft = 0
+    
+    @objc func fire(timer: Timer)
+    {
+        secLeft -= 1
+        execute()
+        
+        if (secLeft <= 0){
+            timer.invalidate()
+            print("TIMER INVALIDATED")
+        }
+    }
 
     
     func execute() {
         DispatchQueue.main.async {
-            while true {
             
             // Decoder
             let time = self.output.itemTime(forHostTime: CACurrentMediaTime())
@@ -119,12 +141,13 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
               
                 let cgImage = temporaryContext.createCGImage(ciImage, from: cgRect)
                 let uiImage = UIImage(cgImage: cgImage!)
-                //var uiImagePtr = UnsafeMutablePointer<UIImage>(&uiImage)
-
-                self.imageOpenCVWrapper.processingImage(uiImage)
+                
+                //self.imageOpenCVWrapper.processingImage(uiImage)
+                
+                //self.imageView.image = uiImage
+                self.image_h264.image = uiImage
                 }
             }
-        }
     }
     
     func adviceUpdate(_ message: String!) {
@@ -138,6 +161,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
     
     @IBAction func start(_ button: UIButton) {
         //openCVWrapper.start()
+        //execute()
     }
     
     @IBAction func stop(_ button: UIButton) {

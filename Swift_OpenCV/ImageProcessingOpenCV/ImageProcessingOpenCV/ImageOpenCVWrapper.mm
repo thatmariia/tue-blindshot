@@ -297,7 +297,9 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
     result.advice = advice;
     result.image = [UIImage imageWithCVMat: image];
     
-    return result;
+    // TODO:: NOTIFICATION CENTER ADD OBSERVER
+    
+    //return result;
 }
 
 
