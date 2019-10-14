@@ -72,7 +72,6 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
         
         /*openCVWrapper = OpenCVWrapper()
         openCVWrapper.setDelegate(self)
-
         openCVWrapper.start()*/
         
         playAdvice()
@@ -80,10 +79,12 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
         // H264 decoding
         //let videoURL = Bundle.main.url(forResource: "foxVillage", withExtension: "m3u8")
         //let url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
+        //let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
         //let url = "https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4"
         //let url = "http://192.168.1.121:8080/video"
         //let url = "rtsp://192.168.1.121:8080/h264_pcm.sdp"
+        //let url = "tcp://192.168.4.1:81"
+        let url = "http://192.168.4.1/stream.m3u8"
         let videoURL = URL(string: url)
         let asset = AVURLAsset(url: videoURL!, options: nil)
         let playerItem = AVPlayerItem(asset: asset)
@@ -138,7 +139,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
             
             // Decoder
             let time = self.output.itemTime(forHostTime: CACurrentMediaTime())
-            print(time)
+            //print(time)
             
             if self.output.hasNewPixelBuffer(forItemTime: time) {
                 let cvPixelBuffer = self.output.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil)
