@@ -298,8 +298,10 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
     result.image = [UIImage imageWithCVMat: image];
     
     // TODO:: NOTIFICATION CENTER ADD OBSERVER
+    [[NSNotificationCenter defaultCenter]
+    postNotificationName:@"didUpdateResult"
+    object:self];
     
-    //return result;
 }
 
 

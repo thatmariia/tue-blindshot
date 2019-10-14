@@ -11,6 +11,7 @@ import AVKit
 
 import AVFoundation
 import Foundation
+import NotificationCenter
 
 struct Result {
     var advice : Int
@@ -50,6 +51,10 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
     
     @IBOutlet weak var image_h264: UIImageView!
     
+    override func viewDidDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +65,8 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
         startButton.layer.cornerRadius = 8
         stopButton.backgroundColor = UIColor(red:1.00, green:0.27, blue:0.00, alpha:1.0)
         stopButton.layer.cornerRadius = 8
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveResult(_:)), name: NSNotification.Name("didUpdateResult"), object: nil)
         
         print("\(ImageOpenCVWrapper.openCVVersionString())")
         
@@ -95,7 +102,10 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
             player?.play()
         
         setTimer()
-        //execute()
+    }
+    
+    @objc func onDidReceiveResult(_ notification:Notification) {
+        print("GOT A NOTIFICIATION   *************************************************")
     }
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
@@ -149,6 +159,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
                 }
             }
     }
+     
     
     func adviceUpdate(_ message: String!) {
         if let new_advice =  advice_lib[message]{
