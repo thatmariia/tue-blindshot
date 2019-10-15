@@ -14,6 +14,7 @@
 #import <iostream>
 #import <math.h>
 #import <opencv2/opencv.hpp>
+#import <opencv2/imgcodecs/ios.h>
 
 #define ADVICE_NOT_DETECTED 0
 #define ADVICE_DETECTED     1
@@ -220,9 +221,11 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
 }
 
 
-+ (void)processingImage:(cv::Mat &) image {
++ (void)processingImage:(UIImage *) uiImage {
     
-    //cv::Mat image =
+    //UIImagetoMat
+    cv::Mat image;
+    UIImageToMat(uiImage, image);
     
     // mask to only have white colors
     Mat hsv;
@@ -295,12 +298,20 @@ int getCurrAdvice (float allowed_dist, cv::Point target, cv::Point frame, cv::Ma
     Result result;
     
     result.advice = advice;
-    result.image = [UIImage imageWithCVMat: image];
+    result.image = MatToUIImage(image);//[UIImage imageWithCVMat: image];
+    
+    //NSValue *valResult = [NSValue valueWithBytes:&result objCType:@encode(typeof(result))];
+    //cout << "VAL IS : " << val << endl;
     
     // TODO:: NOTIFICATION CENTER ADD OBSERVER
-    [[NSNotificationCenter defaultCenter]
+    /*[[NSNotificationCenter defaultCenter]
     postNotificationName:@"didUpdateResult"
-    object:self];
+    object:self];*/
+    
+    NSDictionary* userInfo = @{@"result": @(result.advice)};
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:@"didUpdateResult" object:self userInfo:userInfo];
+     
     
 }
 

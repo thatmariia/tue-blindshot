@@ -79,12 +79,13 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
         // H264 decoding
         //let videoURL = Bundle.main.url(forResource: "foxVillage", withExtension: "m3u8")
         //let url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        //let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
+        let url =  "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.m3u8"
         //let url = "https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4"
         //let url = "http://192.168.1.121:8080/video"
         //let url = "rtsp://192.168.1.121:8080/h264_pcm.sdp"
         //let url = "tcp://192.168.4.1:81"
-        let url = "http://192.168.4.1/stream.m3u8"
+        
+        //let url = "http://192.168.4.1/stream.m3u8" // the real one
         let videoURL = URL(string: url)
         let asset = AVURLAsset(url: videoURL!, options: nil)
         let playerItem = AVPlayerItem(asset: asset)
@@ -144,7 +145,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
             if self.output.hasNewPixelBuffer(forItemTime: time) {
                 let cvPixelBuffer = self.output.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil)
                 let ciImage = CIImage(cvImageBuffer: cvPixelBuffer!)
-                let temporaryContext = CIContext();
+                let temporaryContext = CIContext()
               
                 let width = CVPixelBufferGetWidth(cvPixelBuffer!)
                 let height = CVPixelBufferGetHeight(cvPixelBuffer!)
@@ -153,6 +154,7 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
                 let cgImage = temporaryContext.createCGImage(ciImage, from: cgRect)
                 let uiImage = UIImage(cgImage: cgImage!)
                 
+                ImageOpenCVWrapper.processingImage(uiImage)
                 //self.ImageOpenCVWrapper.processingImage(uiImage)
                 
                 //self.imageView.image = uiImage
