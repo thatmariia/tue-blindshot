@@ -108,6 +108,12 @@ class ViewController: UIViewController, AVAssetResourceLoaderDelegate {
     
     @objc func onDidReceiveResult(_ notification:Notification) {
         print("GOT A NOTIFICIATION   *************************************************")
+        print(notification.userInfo!["result"] as! Int)
+        let newAdviceInt = notification.userInfo!["result"] as! Int
+        let newAdviceStr = String(newAdviceInt)
+        print(newAdviceStr)
+        advice = advice_lib[newAdviceStr] ?? "not_detected"
+        print(advice)
     }
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
